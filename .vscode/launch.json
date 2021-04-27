@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "jlink debug",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceRoot}/build/${input:target}/rpmsg_pingpong.elf",
+            "serverpath": "/usr/bin/JLinkGDBServer", 
+            "servertype": "jlink",
+            "device": "MIMX8MM1_M4",
+            "interface": "jtag",
+            "type": "cortex-debug",
+            "runToMain": true,
+            "armToolchainPath":"/usr/bin/",
+            "request": "launch",
+            "postLaunchCommands": [
+                "flush regs",
+                "load"
+            ],
+            "postRestartCommands": [
+                "flush regs",
+                "load"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+          "type": "pickString",
+          "id": "target",
+          "description": "Debug target?",
+          "options": [
+            "debug",
+            "release",
+            "ddr_debug",
+            "ddr_release",
+            "flash_debug",
+            "flash_release"
+        ],
+        "default": "debug"
+        }
+    ]
+}
